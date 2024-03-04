@@ -1,6 +1,7 @@
 from dependency_injector import providers, containers
 from main.libraries.tools.core.log_tool import LogTool
 from main.libraries.adapters.integrators.core.role_interpreter import RoleInterpreter
+from main.libraries.tools.core.move_tool import MoveTool
 from main.libraries.tools.core.settings_tool import SettingsTool
 
 
@@ -15,6 +16,7 @@ class Container(containers.DeclarativeContainer):
     # Tools
     settings_tool = providers.Factory(SettingsTool)
     log_tool = providers.Factory(LogTool, settings_tool=settings_tool)
+    move_tool = providers.Factory(MoveTool, logTool=log_tool)
 
     # Adapters
     role_interpreter = providers.Factory(RoleInterpreter, settings_tool=settings_tool, logger=log_tool)
